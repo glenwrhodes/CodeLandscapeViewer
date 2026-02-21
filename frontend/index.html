@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Landscape Viewer</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+    <aside id="sidebar" aria-label="Controls sidebar">
+        <div class="sidebar-header">
+            <h1 class="logo">Code Landscape Viewer</h1>
+        </div>
+
+        <div class="sidebar-section">
+            <label for="repo-path" class="input-label">Repository Path</label>
+            <input
+                type="text"
+                id="repo-path"
+                class="text-input"
+                placeholder="C:\path\to\repo"
+                aria-label="Repository path"
+            >
+            <button id="analyze-btn" class="btn-primary" aria-label="Analyze repository">
+                Analyze
+            </button>
+            <div class="btn-row">
+                <button id="save-btn" class="btn-outline" disabled aria-label="Save analysis to JSON">
+                    Save JSON
+                </button>
+                <button id="load-btn" class="btn-outline" aria-label="Load analysis from JSON">
+                    Load JSON
+                </button>
+                <input type="file" id="load-file-input" accept=".json" style="display:none" aria-hidden="true">
+            </div>
+            <div id="status-msg" class="status-msg" aria-live="polite"></div>
+        </div>
+
+        <div class="sidebar-section">
+            <input
+                type="text"
+                id="search-input"
+                class="text-input"
+                placeholder="Search nodes..."
+                aria-label="Search nodes"
+            >
+        </div>
+
+        <div class="sidebar-section" id="node-types-section" style="display:none;">
+            <h2 class="section-title">NODE TYPES</h2>
+            <div id="node-types-list" class="filter-list" aria-label="Node type filters"></div>
+        </div>
+
+        <div class="sidebar-section" id="edge-types-section" style="display:none;">
+            <h2 class="section-title">EDGE TYPES</h2>
+            <div id="edge-types-list" class="filter-list" aria-label="Edge type filters"></div>
+        </div>
+
+        <div class="sidebar-section" id="display-options-section" style="display:none;">
+            <h2 class="section-title">DISPLAY OPTIONS</h2>
+            <div class="toggle-row">
+                <span>Show Labels</span>
+                <label class="toggle" aria-label="Toggle node labels">
+                    <input type="checkbox" id="toggle-labels">
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+            <div class="toggle-row">
+                <span>Show Arrows</span>
+                <label class="toggle" aria-label="Toggle edge arrows">
+                    <input type="checkbox" id="toggle-arrows" checked>
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+            <div class="toggle-row">
+                <span>Freeze Layout</span>
+                <label class="toggle" aria-label="Toggle freeze layout">
+                    <input type="checkbox" id="toggle-freeze">
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+        </div>
+
+        <div class="sidebar-section" id="stats-section" style="display:none;">
+            <h2 class="section-title">STATISTICS</h2>
+            <div id="stats-content" class="stats-content"></div>
+        </div>
+    </aside>
+
+    <main id="graph-container" aria-label="Code graph visualization">
+        <canvas id="graph-canvas"></canvas>
+        <div id="tooltip" class="tooltip" role="tooltip" aria-hidden="true"></div>
+        <div id="loading-overlay" class="loading-overlay" style="display:none;" aria-label="Loading indicator">
+            <div class="spinner"></div>
+            <p>Analyzing repository...</p>
+        </div>
+
+        <aside id="detail-panel" class="detail-panel" aria-label="Node detail panel" aria-hidden="true">
+            <div class="dp-toolbar">
+                <button class="dp-back" style="display:none" aria-label="Go back to previous node">&larr;</button>
+                <div class="dp-toolbar-title">Code Insight</div>
+                <button class="dp-close" aria-label="Close detail panel">&times;</button>
+            </div>
+            <div class="dp-header"></div>
+            <div class="dp-body"></div>
+        </aside>
+    </main>
+
+    <!-- Confirmation Modal -->
+    <div id="modal-backdrop" class="modal-backdrop" style="display:none;" aria-hidden="true">
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+            <h3 id="modal-title"></h3>
+            <p id="modal-message"></p>
+            <div class="modal-actions">
+                <button id="modal-cancel" class="btn-secondary" aria-label="Cancel">Cancel</button>
+                <button id="modal-confirm" class="btn-primary" aria-label="Confirm">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/graph.js"></script>
+    <script src="/static/js/sidebar.js"></script>
+    <script src="/static/js/detail-panel.js"></script>
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
