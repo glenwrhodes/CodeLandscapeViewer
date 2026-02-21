@@ -32,3 +32,6 @@ node_modules/
 *.png
 *.gif
 *.bmp
+
+# Allow doc screenshots
+!docs/*.png

@@ -2,13 +2,19 @@
 
 **Visualize any codebase as an interactive, navigable graph.** Point it at a repository and instantly see how files, classes, endpoints, models, and services connect -- across Python, JavaScript, TypeScript, and more.
 
+![Code Landscape Viewer — interactive graph visualization](docs/screenshot-graph.png)
+
+Click any node to open the **Code Insight** panel -- a deep-dive view showing direct connections, full dependency chains, impact radius, and the deepest path through that node.
+
+![Code Insight panel showing dependency chains and connections](docs/screenshot-detail-panel.png)
+
 ---
 
 ## What It Does
 
 Code Landscape Viewer analyzes a code repository and produces a force-directed graph where every node is a meaningful code element (file, class, function, endpoint, model, service, task) and every edge is a real relationship (imports, calls, inheritance, DB operations, API calls).
 
-Click any node to open the **Code Insight** panel -- a deep-dive view showing direct connections, full dependency chains, impact radius, and the deepest path through that node. Walk the graph interactively to understand how your code actually fits together.
+Walk the graph interactively to understand how your code actually fits together.
 
 ### Key Features
 
